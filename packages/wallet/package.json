@@ -1,0 +1,41 @@
+{
+  "name": "@commune-ts/wallet",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.3",
+    "@uiw/react-markdown-preview": "^5.1.1",
+    "class-variance-authority": "^0.7.0",
+    "next": "^14.2.3",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@commune-ts/eslint-config": "workspace:*",
+    "@commune-ts/prettier-config": "workspace:*",
+    "@commune-ts/tailwind-config": "workspace:*",
+    "@commune-ts/tsconfig": "workspace:*",
+    "@types/react": "^18.2.61",
+    "eslint": "^8.0.0",
+    "prettier": "^3.3.1",
+    "react": "^18.3.1",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "prettier": "@commune-ts/prettier-config"
+}
