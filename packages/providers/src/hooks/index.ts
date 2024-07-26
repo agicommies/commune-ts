@@ -12,7 +12,9 @@ import {
   queryLastBlock,
   queryNotDelegatingVotingPower,
   queryProposalsEntries,
+  queryRewardAllocation,
   queryStakeOut,
+  queryUnrewardedProposals,
 } from "@commune-ts/subspace/queries";
 
 import type {
@@ -96,6 +98,26 @@ export function useNotDelegatingVoting(api: Api | Nullish) {
     queryKey: ["not_delegating_voting_power"],
     enabled: api != null,
     queryFn: () => queryNotDelegatingVotingPower(api!),
+    staleTime: LAST_BLOCK_STALE_TIME,
+    refetchOnWindowFocus: false,
+  });
+}
+
+export function useUnrewardedProposals(api: Api | Nullish) {
+  return useQuery({
+    queryKey: ["unrewarded_proposals"],
+    enabled: api != null,
+    queryFn: () => queryUnrewardedProposals(api!),
+    staleTime: LAST_BLOCK_STALE_TIME,
+    refetchOnWindowFocus: false,
+  });
+}
+
+export function useRewardAllocation(api: Api | Nullish) {
+  return useQuery({
+    queryKey: ["reward_allocation"],
+    enabled: api != null,
+    queryFn: () => queryRewardAllocation(api!),
     staleTime: LAST_BLOCK_STALE_TIME,
     refetchOnWindowFocus: false,
   });
