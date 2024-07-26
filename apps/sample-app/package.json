@@ -28,6 +28,5 @@
         "tsx": "^4.15.6",
         "typescript": "^5.4.5"
     },
-    "prettier": "@commune-ts/prettier-config",
-    "dependencies": {}
+    "prettier": "@commune-ts/prettier-config"
 }
