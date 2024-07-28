@@ -65,7 +65,9 @@ export function VoterList({ proposalStatus }: VoterListProps): JSX.Element {
                 {status}
               </span>
               <span className="text-sm text-gray-400">
-                ~{formatToken(Number(stake))} COMAI
+                {Number(stake) === 0
+                  ? "Registering Stake"
+                  : formatToken(Number(stake))}
               </span>
             </div>
           </div>

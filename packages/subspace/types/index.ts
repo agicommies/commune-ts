@@ -123,7 +123,7 @@ export interface ProposalStakeInfo {
 
 export type SS58Address = Tagged<string, "SS58Address">;
 
-export function isSS58(value: string | null): value is SS58Address {
+export function isSS58(value: string | null | undefined): value is SS58Address {
   let decoded: Uint8Array | null;
   try {
     decoded = decodeAddress(value);
@@ -341,6 +341,13 @@ export interface ProposalCardFields {
   body: string | null;
   netuid: number | "GLOBAL";
   invalid?: boolean;
+}
+
+export interface UnrewardedProposal {
+  subnetId: number;
+  block: bigint;
+  votesFor: Map<SS58Address, bigint>;
+  votesAgainst: Map<SS58Address, bigint>;
 }
 
 // == Field Params ==
