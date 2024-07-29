@@ -7,8 +7,8 @@ interface CardProps {
 }
 
 function Card({ title, description, link }: CardProps): JSX.Element {
-
-  const cardStyle = "flex flex-col justify-between px-6 pb-6 border border-gray-500 rounded-xl shadow-custom-dark md:w-full"
+  const cardStyle =
+    "flex flex-col justify-between px-6 pb-6 border border-gray-500 rounded-xl shadow-custom-dark md:w-full";
   return (
     <div className={cardStyle}>
       <h3>{title}</h3>
@@ -26,7 +26,7 @@ function Card({ title, description, link }: CardProps): JSX.Element {
 function CardList({ data }: { data: CardProps[] }): JSX.Element {
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4 md:flex-row">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:flex-row 2xl:grid-cols-4">
         {data.map((card) => (
           <Card key={card.title} {...card} />
         ))}
@@ -145,6 +145,41 @@ const subnetListCardsData = [
     description:
       "Continuous stream of synthetic training data with verified quality at scale.",
     link: "https://github.com/agicommies/synthia",
+  },
+  {
+    title: "Zangief",
+    description: "CommuneAI Translation Subnet",
+    link: "https://github.com/nakamoto-ai/zangief",
+  },
+  {
+    title: "OpenScope",
+    description:
+      "Trained AI models using 0xScope's cryptocurrency event dataset to predict price movements with high accuracy.",
+    link: "https://github.com/Open0xScope/openscope/",
+  },
+  {
+    title: "Kaiwa",
+    description:
+      "Decentralized platform designed to simplify the process of running, fine-tuning, and deploying AI models.",
+    link: "https://github.com/kaiwa-dev/kaiwa-subnet",
+  },
+  {
+    title: "Eden",
+    description:
+      "Simplifies the way machines learn and manage data through its Commune Subnet, which centers around a Vector Store.",
+    link: "https://github.com/Agent-Artificial/eden-subnet/",
+  },
+  // {
+  //   title: "Market Compass",
+  //   description:
+  //     "Learn how to structure, build, and deploy a subnet on Commune AI!.",
+  //   link: "https://github.com/MarketCompassDev/marketcompass-subnet",
+  // },
+  {
+    title: "Prediction",
+    description:
+      "Advanced time-series prediction platform designed to support a wide range of domains.",
+    link: "https://github.com/panthervis/prediction-subnet",
   },
 ];
 

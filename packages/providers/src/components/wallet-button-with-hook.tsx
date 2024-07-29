@@ -1,6 +1,6 @@
 "use client";
 
-import { WalletButton } from "@commune-ts/ui/wallet-button";
+import { WalletButton } from "@commune-ts/ui/components";
 
 import { useCommune } from "../context/commune";
 

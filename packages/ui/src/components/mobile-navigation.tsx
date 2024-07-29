@@ -76,7 +76,7 @@ export function MobileNavigation(props: MobileNavigationProps) {
                       onClick={toggleMobileMenu}
                       target={external ? "_blank" : "_self"}
                       className={cn(
-                        " block w-full border border-white/20 p-3 px-6 text-center text-base  font-semibold leading-7 text-gray-400 hover:border-green-600 hover:bg-gray-400/10 hover:bg-green-600/5 hover:text-green-600 hover:backdrop-blur-sm",
+                        " block w-full border border-white/20 p-3 px-6 text-center text-base  font-semibold leading-7 text-gray-400 hover:border-green-600 hover:bg-green-600/5 hover:text-green-600 hover:backdrop-blur-sm",
                       )}
                     >
                       {name}

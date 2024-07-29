@@ -8,5 +8,6 @@ export { Footer } from "./footer";
 export { Header } from "./header";
 export { Loading } from "./loading";
 export { MobileNavigation } from "./mobile-navigation";
-export { SelectWalletModal } from "./select-wallet-modal";
-export { WalletButton } from "./wallet-button";
+
+export { WalletButton } from "./wallet/button";
+export { Wallet } from "./wallet/index";

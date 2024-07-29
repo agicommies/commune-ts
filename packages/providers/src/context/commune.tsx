@@ -11,7 +11,7 @@ import {
 } from "@polkadot/extension-inject/types";
 import { toast } from "react-toastify";
 
-import { Wallet } from "@commune-ts/ui/wallet";
+import { Wallet } from "@commune-ts/ui/components";
 
 import type {
   AddCustomProposal,
@@ -261,7 +261,6 @@ export function CommuneProvider({
   // == Transactions ==
 
   async function addStake({
-    netUid,
     validator,
     amount,
     callback,
@@ -269,7 +268,6 @@ export function CommuneProvider({
     if (!api?.tx.subspaceModule?.addStake) return;
 
     const transaction = api.tx.subspaceModule.addStake(
-      netUid,
       validator,
       calculateAmount(amount),
     );
@@ -277,7 +275,6 @@ export function CommuneProvider({
   }
 
   async function removeStake({
-    netUid,
     validator,
     amount,
     callback,
@@ -285,7 +282,6 @@ export function CommuneProvider({
     if (!api?.tx.subspaceModule?.removeStake) return;
 
     const transaction = api.tx.subspaceModule.removeStake(
-      netUid,
       validator,
       calculateAmount(amount),
     );
@@ -303,13 +299,12 @@ export function CommuneProvider({
     fromValidator,
     toValidator,
     amount,
-    netUid,
+
     callback,
   }: TransferStake): Promise<void> {
     if (!api?.tx.subspaceModule?.transferStake) return;
 
     const transaction = api.tx.subspaceModule.transferStake(
-      netUid,
       fromValidator,
       toValidator,
       calculateAmount(amount),
@@ -508,6 +503,7 @@ export function CommuneProvider({
         balance={formatToken(balance || 0n)}
         handleConnect={handleConnect}
         handleWalletModal={handleWalletModal}
+        setSelectedAccount={setSelectedAccount}
         handleWalletSelections={handleWalletSelections}
         isInitialized={isInitialized}
         openWalletModal={openWalletModal}

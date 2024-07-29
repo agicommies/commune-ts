@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-import type { InjectedAccountWithMeta } from "..";
-import { cn } from "..";
+import type { InjectedAccountWithMeta } from "../..";
+import { cn } from "../..";
 
 interface PolkadotHook {
   handleConnect: () => void;
@@ -13,18 +13,20 @@ interface PolkadotHook {
 
 interface WalletButtonProps {
   hook: PolkadotHook;
-  className?: string;
+  buttonText?: string;
 }
 
-export function WalletButton(props: WalletButtonProps): JSX.Element {
-  const { hook, className } = props;
+export function WalletButton({
+  hook,
+  buttonText = "Wallet",
+}: WalletButtonProps): JSX.Element {
   const { handleConnect, isInitialized, selectedAccount } = hook;
 
   if (!isInitialized) {
     return (
       <div
         className={cn(
-          "relative inline-flex items-center justify-center gap-3 border border-white/20 bg-[#898989]/5 px-4 py-2 text-gray-400 backdrop-blur-md hover:border-green-600 hover:bg-green-600/5 hover:text-green-600 active:top-1",
+          "relative inline-flex items-center justify-center gap-3 border border-white/20 bg-[#898989]/5 px-4 py-2 text-gray-400 backdrop-blur-md",
         )}
       >
         <Image
@@ -42,13 +44,13 @@ export function WalletButton(props: WalletButtonProps): JSX.Element {
   return (
     <button
       className={cn(
-        "relative inline-flex items-center justify-center gap-3 border border-white/20 bg-[#898989]/5 px-4 py-2 text-gray-400 backdrop-blur-md hover:border-green-600 hover:bg-green-600/5 hover:text-green-600",
+        "relative z-50 inline-flex items-center justify-center gap-3 border border-white/20 bg-[#898989]/5 px-4 py-2 text-gray-400 backdrop-blur-md hover:border-green-600 hover:bg-green-600/5 hover:text-green-600",
         {
           "border-green-500 bg-green-500/5 text-green-500": selectedAccount,
         },
       )}
-      disabled={!isInitialized}
       onClick={handleConnect}
+      disabled={!isInitialized}
       type="button"
     >
       <span className={cn("flex items-center gap-3 font-medium")}>
@@ -67,7 +69,7 @@ export function WalletButton(props: WalletButtonProps): JSX.Element {
             </span>
           </div>
         ) : (
-          <span className={cn("text-white")}>Wallet</span>
+          <span className={cn("text-white")}>{buttonText}</span>
         )}
       </span>
     </button>
