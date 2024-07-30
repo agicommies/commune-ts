@@ -13,6 +13,8 @@
           buildInputs = [
             pkgs.nodejs_18
             pkgs.pnpm
+            # Run Github actions locally
+            pkgs.act
           ];
         };
       }

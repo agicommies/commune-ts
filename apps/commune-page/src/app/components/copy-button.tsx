@@ -24,7 +24,7 @@ export function CopyButton(props: CodeComponentProps): JSX.Element {
 
   return (
     <button
-      className={`h-8 rounded-xl border-[1px] border-gray-700 px-2 text-xs text-gray-500 ${copied ? "border-green-700 text-green-700" : "hover:border-gray-400 hover:text-gray-200"}`}
+      className={`mt-1 h-8 rounded-md border-[1px] border-gray-700 px-2 text-xs text-gray-500 ${copied ? "border-green-700 text-green-700" : "hover:border-gray-400 hover:text-gray-200"}`}
       onClick={() => void copyTextToClipboard(code)}
       type="button"
     >

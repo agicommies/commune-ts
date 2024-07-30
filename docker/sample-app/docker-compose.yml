@@ -1,0 +1,9 @@
+version: "2.27"
+
+services:
+  sample-app:
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+      args:
+        - APP_NAME=sample-app

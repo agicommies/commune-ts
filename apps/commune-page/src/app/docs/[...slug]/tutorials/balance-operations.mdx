@@ -21,13 +21,13 @@ When staking a balance, you first have to pick a subnet id (netuid) and destinat
 The staking command is defined as follows
 
 ```bash
-comx balance stake <key-name> <amount> <validator-ss58address> [--netuid <number>]
+comx balance stake <key-name> <amount> <validator-ss58address>
 ```
 
 Similar to transferring if the validator key is already located on your disk you can use.
 
 ```bash
-comx balance stake <key-name> <amount> <validator-name> [--netuid <number>]
+comx balance stake <key-name> <amount> <validator-name>
 ```
 
 ## Unstaking Balance
@@ -37,7 +37,7 @@ When unstaking a balance, you need to specify the subnet id (netuid) and the amo
 The unstaking command is defined as follows:
 
 ```bash
-comx balance unstake <key-name> <amount> <validator-ss58address> [--netuid <number>]
+comx balance unstake <key-name> <amount> <validator-ss58address>
 ```
 
 You can also specify the name of the key, if it's located on your disk. Same as in transferring or staking.

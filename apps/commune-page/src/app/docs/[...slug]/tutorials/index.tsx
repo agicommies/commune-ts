@@ -1,44 +1,44 @@
 // Getting Started
-import Intro from "./intro.mdx";
+import BalanceOperations from "./balance-operations.mdx";
 // Concepts
 import Basics from "./basics.mdx";
-import WeightSystem from "./weight-system.mdx";
+import BuildingSubnet from "./building-a-subnet.mdx";
+// Subspace
+import CommuneBlockchain from "./commune-blockchain.mdx";
+import CreateMiner from "./create-miner.mdx";
+import CreateValidator from "./create-validator.mdx";
+import DeployingSubnet from "./deploying-a-subnet.mdx";
+import GeneralSubnetDao from "./general-subnet-dao.mdx";
+import GeneralSubnet from "./general-subnet.mdx";
+import GlobalParameters from "./global-parameters.mdx";
 import Governance from "./governance.mdx";
+import Intro from "./intro.mdx";
+// Working with Keys
+import KeyBasics from "./key-basics.mdx";
+import ModuleConnect from "./module-connect.mdx";
+import ModuleRegister from "./module-register.mdx";
+import ParticipatingOnSubnet from "./participating-on-a-subnet.mdx";
+import RunMiner from "./run-miner.mdx";
+import RunValidator from "./run-validator.mdx";
+import RunningLocalNode from "./running-local-node.mdx";
 // Installation
 import SetupCommune from "./setup-commune.mdx";
 import SetupWallet from "./setup-wallet.mdx";
+import SubnetList from "./subnet-list.mdx";
+import SubnetParameters from "./subnet-parameters.mdx";
+import SubnetTemplate from "./subnet-template.mdx";
+import Testnet from "./testnet.mdx";
+import WeightSystem from "./weight-system.mdx";
 // Modules
 import WhatIsModule from "./what-is-a-module.mdx";
-import ModuleRegister from "./module-register.mdx";
-import ModuleConnect from "./module-connect.mdx";
 // Subnets
 import WhatIsSubnet from "./what-is-a-subnet.mdx";
-import ParticipatingOnSubnet from "./participating-on-a-subnet.mdx";
-import BuildingSubnet from "./building-a-subnet.mdx";
-import SubnetTemplate from "./subnet-template.mdx";
-import DeployingSubnet from "./deploying-a-subnet.mdx";
-import SubnetParameters from "./subnet-parameters.mdx";
-import GeneralSubnet from "./general-subnet.mdx";
-import GeneralSubnetDao from "./general-subnet-dao.mdx";
-import YumaSubnets from "./yuma-subnets.mdx";
-import SubnetList from "./subnet-list.mdx";
-// Working with Keys
-import KeyBasics from "./key-basics.mdx";
-import BalanceOperations from "./balance-operations.mdx";
 // Mining
 import WhatIsMining from "./what-is-mining.mdx";
-import CreateMiner from "./create-miner.mdx";
-import RunMiner from "./run-miner.mdx";
 // Validating
 import WhatIsValidating from "./what-is-validating.mdx";
-import CreateValidator from "./create-validator.mdx";
-import RunValidator from "./run-validator.mdx";
-// Subspace
-import CommuneBlockchain from "./commune-blockchain.mdx";
-import GlobalParameters from "./global-parameters.mdx";
 import YumaConsensus from "./yuma-consensus.mdx";
-import Testnet from "./testnet.mdx";
-import RunningLocalNode from "./running-local-node.mdx";
+import YumaSubnets from "./yuma-subnets.mdx";
 
 const gettingStartedSection = [
   {
@@ -271,7 +271,13 @@ const subspaceSection = [
   },
 ];
 
-export const tutorials = [
+export interface Tutorial {
+  contents: { component: JSX.Element; href: string; name: string }[];
+  title: string;
+  tutorialId: string;
+}
+
+export const tutorials: Tutorial[] = [
   {
     contents: gettingStartedSection,
     title: "Getting Started",

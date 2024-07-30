@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 
 import { Providers } from "@commune-ts/providers/context";
-import { WalletButtonWithHook } from "@commune-ts/providers/wallet-button-with-hook";
+// import { WalletButtonWithHook } from "@commune-ts/providers/wallet-button-with-hook";
 import { links } from "@commune-ts/ui/data";
 import { cairo } from "@commune-ts/ui/fonts";
 import { Footer } from "@commune-ts/ui/footer";
@@ -36,10 +36,10 @@ export default function RootLayout({
               { name: "Join Community", href: links.discord, external: true },
             ]}
             title="Commune AI"
-            wallet={<WalletButtonWithHook />}
+            // wallet={<WalletButtonWithHook />}
           />
           {children}
-          <Footer shouldBeFixed className="lg:block md:hidden" />
+          <Footer shouldBeFixed className="md:hidden lg:block" />
         </Providers>
       </body>
     </html>

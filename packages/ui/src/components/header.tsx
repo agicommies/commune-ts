@@ -8,7 +8,7 @@ interface HeaderProps {
   logoSrc: string;
   title: string;
   navigationLinks?: { name: string; href: string; external: boolean }[];
-  wallet: JSX.Element;
+  wallet?: JSX.Element;
   mobileContent?: ReactElement;
 }
 

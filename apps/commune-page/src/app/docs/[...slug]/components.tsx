@@ -7,8 +7,8 @@ interface CardProps {
 }
 
 function Card({ title, description, link }: CardProps): JSX.Element {
-
-  const cardStyle = "flex flex-col justify-between px-6 pb-6 border border-gray-500 rounded-xl shadow-custom-dark md:w-full"
+  const cardStyle =
+    "flex flex-col justify-between px-6 pb-6 border border-gray-500 rounded-xl md:w-full";
   return (
     <div className={cardStyle}>
       <h3>{title}</h3>
@@ -26,7 +26,7 @@ function Card({ title, description, link }: CardProps): JSX.Element {
 function CardList({ data }: { data: CardProps[] }): JSX.Element {
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-4 md:flex-row">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:flex-row 2xl:grid-cols-4">
         {data.map((card) => (
           <Card key={card.title} {...card} />
         ))}

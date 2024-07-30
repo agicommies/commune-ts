@@ -23,34 +23,40 @@ export function DocSidebar(props: DocSidebarProps): JSX.Element {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menuContent, setMenuContent] = useState(tutorials);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
 
   function toggleMobileMenu(): void {
     setMobileMenuOpen(!mobileMenuOpen);
   }
 
   const handleSearchOnMenu = (searchValue: string) => {
-    if (searchValue.trim().length == 0) return setMenuContent(tutorials)
+    if (searchValue.trim().length == 0) return setMenuContent(tutorials);
 
-    const filteredMenuContent = tutorials.map(tutorial => {
-      return {
-        title: tutorial.title,
-        tutorialId: tutorial.tutorialId,
-        contents: tutorial.contents.filter(contents => contents.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
-      }
-    }).filter(tutorial => tutorial.contents.length > 0)
-    setMenuContent(filteredMenuContent)
-  }
+    const filteredMenuContent = tutorials
+      .map((tutorial) => {
+        return {
+          title: tutorial.title,
+          tutorialId: tutorial.tutorialId,
+          contents: tutorial.contents.filter((contents) =>
+            contents.name
+              .toLocaleLowerCase()
+              .includes(searchValue.toLocaleLowerCase()),
+          ),
+        };
+      })
+      .filter((tutorial) => tutorial.contents.length > 0);
+    setMenuContent(filteredMenuContent);
+  };
 
   const handleSearchInput = (search: string) => {
-    setSearchValue(search)
-    handleSearchOnMenu(search)
-  }
+    setSearchValue(search);
+    handleSearchOnMenu(search);
+  };
 
   const handleClearSearch = () => {
-    setSearchValue('')
-    setMenuContent(tutorials)
-  }
+    setSearchValue("");
+    setMenuContent(tutorials);
+  };
 
   const commonButtonClass =
     "flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100/10 p-1.5 hover:bg-gray-100/[0.15]";
@@ -60,9 +66,13 @@ export function DocSidebar(props: DocSidebarProps): JSX.Element {
       <div
         aria-hidden="true"
         aria-label="Global"
-        className={`animate-menu-fade fixed z-10 h-[calc(100svh-69px)] lg:h-[calc(100svh-123px)] w-full backdrop-blur-sm lg:w-[17rem] lg:backdrop-blur-none ${mobileMenuOpen ? "visible" : "hidden"} lg:block`}
+        className={`fixed z-10 h-[calc(100svh-69px)] w-full backdrop-blur-sm lg:h-[calc(100svh-123px)] lg:w-[17rem] lg:backdrop-blur-none ${mobileMenuOpen ? "visible" : "hidden"} lg:block`}
       >
-        <div id="background-blurred" className="fixed w-full h-full transparent backdrop-blur-sm md:hidden" onClick={toggleMobileMenu} />
+        <div
+          id="background-blurred"
+          className="transparent fixed h-full w-full backdrop-blur-sm md:hidden"
+          onClick={toggleMobileMenu}
+        />
         <div
           className={`sm:min-w-2/6 relative h-full w-4/6 overflow-y-scroll border-r border-gray-900/[0.06] bg-[url('/bg-pattern.svg')] p-8 sm:w-3/6 md:w-2/6 lg:mx-auto lg:w-full`}
         >
@@ -74,13 +84,27 @@ export function DocSidebar(props: DocSidebarProps): JSX.Element {
             <span className="sr-only">Close menu</span>
             <ChevronLeftIcon
               aria-hidden="true"
-              className="w-6 h-6 fill-white"
+              className="h-6 w-6 fill-white"
             />
           </button>
 
-          <div className="flex items-center mt-8 mb-4 bg-black border h-fit lg:mt-0 border-white/20">
-            <input className="w-auto px-2 py-1 text-gray-200 bg-black focus:outline-none" value={searchValue} onChange={(e) => { handleSearchInput(e.target.value) }} placeholder="Search" />
-            {searchValue.length > 0 && <XMarkIcon width={18} color="white" className="w-auto h-auto" onClick={handleClearSearch} />}
+          <div className="mb-4 mt-8 flex h-fit items-center pr-4 lg:mt-0">
+            <input
+              className="w-fit border border-white/20 bg-black px-2 py-1 text-gray-200"
+              value={searchValue}
+              onChange={(e) => {
+                handleSearchInput(e.target.value);
+              }}
+              placeholder="Search"
+            />
+            {searchValue.length > 0 && (
+              <XMarkIcon
+                width={18}
+                color="white"
+                className="h-auto w-auto"
+                onClick={handleClearSearch}
+              />
+            )}
           </div>
           {menuContent.map((tutorial) => {
             return (
@@ -98,8 +122,8 @@ export function DocSidebar(props: DocSidebarProps): JSX.Element {
                         key={content.name}
                       >
                         {params.slug[1] === content.href &&
-                          params.slug[0].startsWith(tutorial.tutorialId) && (
-                            <div className="absolute w-2 h-2 bg-white rounded-full -left-1" />
+                          params.slug[0]?.startsWith(tutorial.tutorialId) && (
+                            <div className="absolute -left-1 h-2 w-2 rounded-full bg-white" />
                           )}
                         <span>{content.name}</span>
                       </Link>
@@ -122,11 +146,11 @@ export function DocSidebar(props: DocSidebarProps): JSX.Element {
             <Bars3Icon className="fill-white" width={16} />
           </button>
           <span className="mr-2 font-light">
-            {tutorials[activeTutorial].title}
+            {tutorials[activeTutorial]?.title}
           </span>
           <ChevronRightIcon width={16} />
           <span className="ml-2 font-semibold text-white">
-            {tutorials[activeTutorial].contents[activeContent].name}
+            {tutorials[activeTutorial]?.contents[activeContent]?.name}
           </span>
         </div>
       </div>

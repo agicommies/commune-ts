@@ -57,7 +57,7 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ```bash
 # Install dependencies
-pnpm i
+pnpm install
 
 # Configure environment variables
 # There is an `.env.example` in the root directory you can use for reference
@@ -65,6 +65,15 @@ cp .env.example .env
 
 # Push the Drizzle schema to the database
 pnpm db:push
+```
+
+## Docker
+
+The Docker setup for each app is in `docker/<app-name>`. You can build and run
+the image for the sample app with:
+
+```sh
+docker compose -f docker/sample-app/docker-compose.yml up
 ```
 
 ## Useful Links
