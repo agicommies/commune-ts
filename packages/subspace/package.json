@@ -1,22 +1,29 @@
 {
     "name": "@commune-ts/subspace",
     "type": "module",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "private": true,
     "exports": {
-        "./utils": "./utils/index.ts",
-        "./types": "./types/index.ts",
-        "./queries": "./queries/index.ts"
+        "./utils": {
+            "types": "./dist/utils/index.d.ts",
+            "default": "./dist/utils/index.js"
+        },
+        "./types": {
+            "types": "./dist/types/index.d.ts",
+            "default": "./dist/types/index.js"
+        },
+        "./queries": {
+            "types": "./dist/queries/index.d.ts",
+            "default": "./dist/queries/index.js"
+        }
     },
-    "compilerOptions": {
-        "module": "ESNext",
-        "target": "ESNext",
-        "esModuleInterop": true
+    "scripts": {
+        "build": "tsc"
     },
     "devDependencies": {
         "@commune-ts/eslint-config": "workspace:*",
         "@commune-ts/tsconfig": "workspace:*",
-        "tsx": "^4.15.6"
+        "@types/node": "^20.11.24"
     },
     "dependencies": {
         "@polkadot/api": "^11.1.1",

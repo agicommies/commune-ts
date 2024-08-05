@@ -6,11 +6,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
+      "default": "./dist/index.js"
     },
     "./client": {
       "types": "./dist/client.d.ts",
-      "default": "./src/client.ts"
+      "default": "./dist/client.js"
     },
     "./schema": {
       "types": "./dist/schema.d.ts",
@@ -34,16 +34,17 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "postgres": "^3.4.4",
     "@t3-oss/env-nextjs": "^0.10.1",
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
+    "postgres": "^3.4.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@commune-ts/eslint-config": "workspace:*",
     "@commune-ts/prettier-config": "workspace:*",
     "@commune-ts/tsconfig": "workspace:*",
+    "@types/node": "^20.11.24",
     "dotenv-cli": "^7.4.2",
     "drizzle-kit": "^0.22.6",
     "eslint": "^8.0.0",

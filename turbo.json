@@ -19,6 +19,11 @@
         ".vercel/output/**"
       ]
     },
+    "start": {
+      "dependsOn": [
+        "^topo"
+      ]
+    },
     "dev": {
       "persistent": true,
       "cache": false

@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -18,3 +16,32 @@ services:
       - postgres
     ports:
       - 8080:8080
+  commune-cache:
+    build:
+      context: .
+      dockerfile: tooling/dockerfile/backend-service.Dockerfile
+      args:
+        - PROJECT=commune-cache
+        - PORT=3010
+    environment:
+      - NEXT_PUBLIC_WS_PROVIDER_URL=${NEXT_PUBLIC_WS_PROVIDER_URL}
+      - PORT=3010
+    command: npm start
+    ports:
+      - 3010:3010
+  comrads-worker:
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: tooling/dockerfile/backend-service.Dockerfile
+      args:
+        - PROJECT=comrads-worker
+        - PORT=3020
+    environment:
+      - NEXT_PUBLIC_WS_PROVIDER_URL=${NEXT_PUBLIC_WS_PROVIDER_URL}
+      - POSTGRES_URL=postgres://postgres:password@postgres:5432/commune-ts-db
+      - PORT=3020
+    ports:
+      - 3020:3020
+    command: npm start

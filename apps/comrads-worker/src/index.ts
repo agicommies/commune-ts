@@ -1,6 +1,7 @@
 import "@polkadot/api-augment";
 
 import { WsProvider } from "@polkadot/api";
+import express from "express";
 
 import type { SQL, Table } from "@commune-ts/db";
 import type { LastBlock, SubspaceModule } from "@commune-ts/subspace/types";
@@ -125,3 +126,15 @@ function buildConflictUpdateColumns<
 main()
   .catch(console.error)
   .finally(() => process.exit());
+
+const app = express();
+
+app.get("/api/health", (_, res) => {
+  res.send("OK");
+});
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  log(`/helth listening on port ${port}`);
+});

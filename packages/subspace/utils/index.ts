@@ -7,8 +7,8 @@ import type {
   Entry,
   Proposal,
   RawEntry,
-} from "../types";
-import { parseDaos, parseProposal, URL_SCHEMA } from "../types";
+} from "@commune-ts/subspace/types";
+import { parseDaos, parseProposal, URL_SCHEMA } from "@commune-ts/subspace/types";
 
 // == assertion ==
 

@@ -6,11 +6,10 @@ import type { Extends } from "tsafe";
 import { ApiPromise } from "@polkadot/api";
 import { StorageKey } from "@polkadot/types";
 import { decodeAddress } from "@polkadot/util-crypto";
-import { Variant } from "rustie/dist/enum";
 import { assert } from "tsafe";
 import { z } from "zod";
-
-import { assertOrThrow } from "../utils";
+import { Variant } from "rustie/dist/enum.js";
+import { assertOrThrow } from "@commune-ts/subspace/utils";
 
 export type { Codec } from "@polkadot/types/types";
 

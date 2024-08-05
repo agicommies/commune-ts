@@ -7,9 +7,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env*
 
 # dependencies
-node_modules
+**/node_modules
 .pnp
 .pnp.js
 
@@ -36,3 +37,11 @@ yarn-error.log*
 
 # ui
 dist/
+
+.git
+.gitignore
+*.md
+dist
+.turbo
+
+flake*

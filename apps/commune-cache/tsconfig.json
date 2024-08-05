@@ -11,10 +11,9 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "types": ["node"],
-    "rootDir": ".",
     "noEmit": false,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": false
   },
-  "include": ["*.ts", "types", "utils", "queries"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["*.ts", "src"],
+  "exclude": ["node_modules"]
 }

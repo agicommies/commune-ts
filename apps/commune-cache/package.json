@@ -1,5 +1,5 @@
 {
-  "name": "comrads-worker",
+  "name": "commune-cache",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -10,25 +10,25 @@
   "scripts": {
     "dev": "pnpm with-env tsx ./src/index.ts",
     "build": "tsc",
-    "start": "node ./dist/index.js",
-    "start:local": "pnpm with-env pnpm start",
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "start": "node ./dist/index.js",
+    "start:local": "pnpm with-env pnpm start",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --"
   },
   "devDependencies": {
-    "@commune-ts/db": "workspace:*",
     "@commune-ts/eslint-config": "workspace:*",
     "@commune-ts/prettier-config": "workspace:*",
-    "@commune-ts/subspace": "workspace:*",
     "@commune-ts/tsconfig": "workspace:*",
     "@polkadot/api-augment": "^11.1.1",
     "@types/express": "^4.17.21",
+    "@types/json-bigint": "^1.0.4",
     "@types/node": "^20.11.24",
     "dotenv-cli": "^7.4.2",
     "eslint": "^8.0.0",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.1",
     "ts-node": "^10.9.2",
@@ -37,7 +37,9 @@
   },
   "prettier": "@commune-ts/prettier-config",
   "dependencies": {
+    "@commune-ts/subspace": "workspace:*",
     "@polkadot/api": "^11.1.1",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "json-bigint": "^1.0.0"
   }
 }
