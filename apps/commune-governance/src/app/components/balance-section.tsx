@@ -56,7 +56,7 @@ export function BalanceSection({
           <Image alt="Dao Icon" height={40} src="/dao-icon.svg" width={40} />
         </div>
 
-        <div className="flex animate-fade-down flex-row items-center justify-between border-t !border-white/20 bg-[#898989]/5 p-6 pr-6 backdrop-blur-md animate-delay-100 lg:w-1/3 lg:border lg:pr-10">
+        <div className="flex animate-fade-down flex-row items-center justify-between border-t border-white/20 bg-[#898989]/5 p-6 pr-6 backdrop-blur-md animate-delay-100 lg:w-1/3 lg:border lg:pr-10">
           <div className="flex flex-col items-start gap-1">
             {!isInitialized && (
               <p className="animate-pulse text-gray-400">

@@ -9,6 +9,7 @@ import { WalletButtonWithHook } from "@commune-ts/providers/wallet-button-with-h
 
 import type { Vote } from "./vote-label";
 import { Card } from "./card";
+import { SectionHeaderText } from "./section-header-text";
 
 export function VoteCard(props: {
   proposalId: number;
@@ -46,9 +47,7 @@ export function VoteCard(props: {
     return (
       <Card.Root>
         <Card.Header>
-          <h3 className="text-base font-semibold text-gray-400">
-            Cast your vote
-          </h3>
+          <SectionHeaderText text="Cast your vote" />
         </Card.Header>
         <Card.Body className="flex w-full flex-col space-y-4 p-6">
           <span>You already voted!</span>
@@ -59,9 +58,7 @@ export function VoteCard(props: {
 
   return (
     <>
-      <h3 className="mb-4 text-base font-semibold text-white">
-        Cast your vote
-      </h3>
+      <SectionHeaderText text="Cast your vote" />
       {isConnected ? (
         <div className="flex w-full gap-4">
           <button

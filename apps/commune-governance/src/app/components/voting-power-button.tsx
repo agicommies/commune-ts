@@ -9,6 +9,8 @@ import {
 import type { TransactionResult } from "@commune-ts/providers/types";
 import { useCommune } from "@commune-ts/providers/use-commune";
 
+import { SectionHeaderText } from "./section-header-text";
+
 export function VotingPowerButton(): JSX.Element | null {
   const { selectedAccount, updateDelegatingVotingPower, notDelegatingVoting } =
     useCommune();
@@ -56,9 +58,10 @@ export function VotingPowerButton(): JSX.Element | null {
 
   return (
     <div>
+      <SectionHeaderText text="Vote power settings" />
       <div className="flex w-full flex-row items-center justify-center gap-3">
         <button
-          className="w-11/12 border border-gray-500 py-1 font-semibold text-green-500 transition duration-200 hover:border-green-600 hover:bg-green-500/10"
+          className="w-11/12 border border-green-500 bg-green-600/5 py-2.5 font-semibold text-green-500 transition duration-200 hover:border-green-400 hover:bg-green-500/15"
           onClick={() => {
             handleVote();
           }}
@@ -84,7 +87,7 @@ export function VotingPowerButton(): JSX.Element | null {
             <InformationCircleIcon className="h-7 w-7 pt-1.5 text-green-500" />
           </button>
           {showTooltip ? (
-            <div className="absolute bottom-10 right-0 w-64 border border-gray-500 bg-green-950/50 p-2 text-sm text-white shadow-lg backdrop-blur-md">
+            <div className="absolute bottom-10 right-0 w-64 border border-white/20 bg-black/80 p-3 text-sm text-gray-200 shadow-lg backdrop-blur-md">
               {tooltipText}
             </div>
           ) : null}

@@ -393,7 +393,11 @@ export function CommuneProvider({
       ? api.tx.governanceModule.enableVotePowerDelegation()
       : api.tx.governanceModule.disableVotePowerDelegation();
 
-    await sendTransaction("Create Custom Proposal", transaction, callback);
+    await sendTransaction(
+      "Update Delegating Voting Power",
+      transaction,
+      callback,
+    );
   }
 
   // Hooks
