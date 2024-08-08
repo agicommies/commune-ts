@@ -31,5 +31,5 @@ type RouterOutputs = inferRouterOutputs<AppRouter>;
 
 export { createTRPCContext, appRouter, createCaller };
 export type { AppRouter, RouterInputs, RouterOutputs };
-export type { SignableEndpointData } from './router/proposal-comment';
-export { signData } from './auth/signed-data';
+export type { SignableEndpointData } from "./router/proposal-comment";
+export { signData } from "./auth/signed-data";

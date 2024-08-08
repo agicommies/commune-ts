@@ -14,8 +14,8 @@ import {
   PROPOSAL_COMMENT_INSERT_SCHEMA,
 } from "@commune-ts/db/validation";
 
-import { publicProcedure } from "../trpc";
 import { SignedDataSchema, verifySignedData } from "../auth/signed-data";
+import { publicProcedure } from "../trpc";
 
 export enum SignedEndpoint {
   CreateComment = "CreateComment",
@@ -28,11 +28,14 @@ export const SignedEndpointDataSchema = {
   [SignedEndpoint.CreateComment]: PROPOSAL_COMMENT_INSERT_SCHEMA,
   [SignedEndpoint.CreateCommentReport]: COMMENT_REPORT_INSERT_SCHEMA,
   [SignedEndpoint.CastVote]: COMMENT_INTERACTION_INSERT_SCHEMA,
-  [SignedEndpoint.DeleteVole]: z.object({ commentId: z.string(), userKey: z.string() })
+  [SignedEndpoint.DeleteVole]: z.object({
+    commentId: z.string(),
+    userKey: z.string(),
+  }),
 };
 
 export type SignableEndpointData = {
-  [K in SignedEndpoint]: z.infer<typeof SignedEndpointDataSchema[K]>
+  [K in SignedEndpoint]: z.infer<(typeof SignedEndpointDataSchema)[K]>;
 };
 
 export const proposalCommentRouter = {
@@ -72,7 +75,10 @@ export const proposalCommentRouter = {
   createComment: publicProcedure
     .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CreateComment']);
+      const { data, address } = verifySignedData(
+        input,
+        SignedEndpointDataSchema["CreateComment"],
+      );
       if (!address || address !== data.userKey) {
         throw new Error("User key does not match signature");
       }
@@ -81,7 +87,10 @@ export const proposalCommentRouter = {
   createCommentReport: publicProcedure
     .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CreateCommentReport']);
+      const { data, address } = verifySignedData(
+        input,
+        SignedEndpointDataSchema["CreateCommentReport"],
+      );
       if (!address || address !== data.userKey) {
         throw new Error("User key does not match signature");
       }
@@ -90,7 +99,10 @@ export const proposalCommentRouter = {
   castVote: publicProcedure
     .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CastVote']);
+      const { data, address } = verifySignedData(
+        input,
+        SignedEndpointDataSchema["CastVote"],
+      );
       if (!address || address !== data.userKey) {
         throw new Error("User key does not match signature");
       }
@@ -110,7 +122,10 @@ export const proposalCommentRouter = {
   deleteVote: publicProcedure
     .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['DeleteVote']);
+      const { data, address } = verifySignedData(
+        input,
+        SignedEndpointDataSchema["DeleteVote"],
+      );
       if (!address || address !== data.userKey) {
         throw new Error("User key does not match signature");
       }
