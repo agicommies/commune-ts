@@ -14,6 +14,7 @@ import { toast } from "@commune-ts/providers/use-toast";
 import { formatToken, smallAddress } from "@commune-ts/providers/utils";
 
 import { api } from "~/trpc/react";
+import { SectionHeaderText } from "./section-header-text";
 
 export enum VoteType {
   UP = "UP",
@@ -35,16 +36,17 @@ export function ProposalComment({
 
   function getVoterStake(address: SS58Address) {
     if (!selectedAccount?.address) return null;
+
     if ("open" in proposalStatus) {
       const { votesFor, votesAgainst, stakeFor, stakeAgainst } =
         proposalStatus.open;
 
       if (votesFor.includes(address)) {
-        return stakeFor / BigInt(votesFor.length);
+        return `${formatToken(stakeFor / BigInt(votesFor.length))} COMAI`;
       }
 
       if (votesAgainst.includes(address)) {
-        return stakeAgainst / BigInt(votesAgainst.length);
+        return `${formatToken(stakeAgainst / BigInt(votesAgainst.length))} COMAI`;
       }
     }
     return null;
@@ -122,11 +124,7 @@ export function ProposalComment({
   return (
     <div className="flex w-full flex-col">
       <div className="m-2 flex h-full min-h-max animate-fade-down flex-col items-center justify-between border border-white/20 bg-[#898989]/5 p-6 text-white backdrop-blur-md animate-delay-200">
-        <div className="mb-4 w-full border-b border-gray-500 border-white/20 pb-2 text-gray-400">
-          <h2 className="text-start text-lg font-semibold">
-            Community Comments
-          </h2>
-        </div>
+        <SectionHeaderText text="Community Comments" />
         {proposalComments?.length ? (
           <div className="flex max-h-[25vh] w-full flex-col gap-3 overflow-auto pb-3 pr-2">
             {proposalComments.map((comment) => (
@@ -139,10 +137,7 @@ export function ProposalComment({
                     <UserIcon className="h-4 w-4" />{" "}
                     {smallAddress(comment.userKey)}
                     <span className="ml-2 text-sm text-gray-400">
-                      {formatToken(
-                        Number(getVoterStake(comment.userKey as SS58Address)),
-                      )}{" "}
-                      COMAI
+                      {getVoterStake(comment.userKey as SS58Address)}
                     </span>
                   </span>
                   <div className="flex gap-1">
@@ -152,7 +147,7 @@ export function ProposalComment({
                         votingCommentId === comment.id ||
                         !selectedAccount?.address
                       }
-                      className={`flex items-center ${
+                      className={`flex items-center hover:text-green-300 ${
                         (localVotes[comment.id] ?? userVotes?.[comment.id]) ===
                         VoteType.UP
                           ? "text-green-500"
@@ -168,7 +163,7 @@ export function ProposalComment({
                         votingCommentId === comment.id ||
                         !selectedAccount?.address
                       }
-                      className={`flex items-center ${
+                      className={`flex items-center hover:text-red-300 ${
                         (localVotes[comment.id] ?? userVotes?.[comment.id]) ===
                         VoteType.DOWN
                           ? "text-red-500"

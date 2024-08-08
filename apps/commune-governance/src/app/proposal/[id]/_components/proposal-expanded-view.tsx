@@ -176,7 +176,7 @@ export function ProposalExpandedView(props: CustomContent): JSX.Element {
             proposalStatus={content.status}
           />
         </div>
-        <div className="m-2 flex h-fit min-h-max animate-fade-down flex-col items-center justify-between border border-white/20 bg-[#898989]/5 p-6 text-white  backdrop-blur-md animate-delay-200">
+        <div className="m-2 hidden h-fit min-h-max animate-fade-down flex-col items-center justify-between border border-white/20 bg-[#898989]/5 p-6 text-white backdrop-blur-md  animate-delay-200 md:flex">
           <CreateComment proposalId={content.id} />
         </div>
       </div>
@@ -220,11 +220,11 @@ export function ProposalExpandedView(props: CustomContent): JSX.Element {
           </div>
         </div>
 
-        <div className="m-2 animate-fade-down border border-white/20 bg-[#898989]/5 p-6 text-gray-400 backdrop-blur-md animate-delay-500">
+        <div className="m-2 hidden animate-fade-down border border-white/20 bg-[#898989]/5 p-6 text-gray-400 backdrop-blur-md animate-delay-500 md:block">
           <VoteCard proposalId={content.id} voted="UNVOTED" />
         </div>
 
-        <div className="m-2 animate-fade-down border border-white/20 bg-[#898989]/5 p-6 text-gray-400 backdrop-blur-md animate-delay-700">
+        <div className="m-2 hidden animate-fade-down border border-white/20 bg-[#898989]/5 p-6 text-gray-400 backdrop-blur-md animate-delay-700 md:block">
           <VotingPowerButton />
         </div>
 
