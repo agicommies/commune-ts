@@ -7,6 +7,6 @@ import type { Config } from "tailwindcss";
 import baseConfig from "@commune-ts/tailwind-config/web";
 
 export default {
-  content: ["./src/**/*.tsx"],
+  content: ["./src/**/*.{tsx,ts,jsx,js}"],
   presets: [baseConfig],
 } satisfies Config;

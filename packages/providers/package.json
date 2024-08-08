@@ -7,8 +7,7 @@
     "./context": "./src/index.tsx",
     "./utils": "./src/utils/index.ts",
     "./types": "./src/types/index.ts",
-    "./hooks": "./src/hooks/index.ts",
-    "./wallet-button-with-hook": "./src/components/wallet-button-with-hook.tsx"
+    "./hooks": "./src/hooks/index.ts"
   },
   "license": "MIT",
   "dependencies": {

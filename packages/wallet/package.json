@@ -1,0 +1,36 @@
+{
+  "name": "@commune-ts/wallet",
+  "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tailwindcss -i ./src/style.css -o ./dist/index.css --minify",
+    "lint": "eslint",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "type-check": "tsc --noEmit",
+    "tailwind:watch": "tailwindcss -i ./src/style.css -o ./src/output.css --watch"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@commune-ts/eslint-config": "workspace:*",
+    "@commune-ts/tailwind-config": "workspace:*",
+    "@commune-ts/tsconfig": "workspace:*",
+    "@types/react": "^18.2.61",
+    "autoprefixer": "^10.4.18",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "eslint": "^8.0.0",
+    "prettier": "^3.3.1",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5"
+  },
+  "prettier": "@commune-ts/prettier-config"
+}

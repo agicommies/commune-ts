@@ -3,11 +3,11 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 
 import { Providers } from "@commune-ts/providers/context";
-import { WalletButtonWithHook } from "@commune-ts/providers/wallet-button-with-hook";
 import { links } from "@commune-ts/ui/data";
 import { cairo } from "@commune-ts/ui/fonts";
 import { Footer } from "@commune-ts/ui/footer";
 import { Header } from "@commune-ts/ui/header";
+import { Wallet, WalletButton } from "@commune-ts/wallet";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { MobileHeaderContent } from "./components/mobile-header-content";
@@ -32,10 +32,11 @@ export default function RootLayout({
       >
         <Providers>
           <TRPCReactProvider>
+            <Wallet />
             <Header
               logoSrc="/logo.svg"
               title="Community Governance"
-              wallet={<WalletButtonWithHook />}
+              wallet={<WalletButton />}
               mobileContent={<MobileHeaderContent />}
               navigationLinks={[
                 { name: "Homepage", href: links.landing_page, external: true },

@@ -14,6 +14,7 @@
     "@commune-ts/api": "workspace:*",
     "@commune-ts/providers": "workspace:*",
     "@commune-ts/ui": "workspace:*",
+    "@commune-ts/wallet": "workspace:*",
     "@heroicons/react": "^2.1.3",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.45.0",

@@ -11,9 +11,11 @@ export function BalanceSection({
 }: {
   className?: string;
 }): JSX.Element {
+
   const {
     isInitialized,
-    handleConnect,
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    handleWalletModal,
     daoTreasury,
     balance,
     selectedAccount,
@@ -31,10 +33,10 @@ export function BalanceSection({
 
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center lg:mt-10`}
+      className={`flex w-full flex-col items-center justify-center lg:mt-10 ${className ?? ""}`}
     >
       <div
-        className={`flex w-full flex-col divide-gray-500 border-white/20 text-2xl text-green-500 lg:flex-row lg:gap-6 lg:pb-5 ${className ?? ""}`}
+        className={`flex w-full flex-col divide-gray-500 border-white/20 text-2xl text-green-500 lg:flex-row lg:gap-6 lg:pb-5`}
       >
         <div className="flex animate-fade-down flex-row items-center justify-between border-white/20 bg-[#898989]/5 p-6 pr-6 backdrop-blur-md lg:w-1/3 lg:border lg:pr-10">
           <div className="flex flex-col gap-1">
@@ -69,7 +71,7 @@ export function BalanceSection({
               <button
                 className="inline-flex items-center justify-center text-gray-300 hover:text-green-600"
                 disabled={!isInitialized}
-                onClick={handleConnect}
+                onClick={() => handleWalletModal()}
                 type="button"
               >
                 Connect wallet
@@ -100,7 +102,7 @@ export function BalanceSection({
         <div className="flex animate-fade-down flex-row items-center justify-between border-t !border-white/20 bg-[#898989]/5 p-6 pr-6 backdrop-blur-md animate-delay-200 lg:w-1/3 lg:border lg:pr-10">
           <div className="flex flex-col items-start gap-1">
             {!isInitialized ||
-            (selectedAccount?.meta.name && userStakeWeight == null) ? (
+              (selectedAccount?.meta.name && userStakeWeight == null) ? (
               <p className="animate-pulse text-gray-400">
                 Loading...
                 <span className="text-lg text-white"> COMAI</span>
@@ -109,7 +111,7 @@ export function BalanceSection({
               <button
                 className="inline-flex items-center justify-center text-gray-300 hover:text-green-600"
                 disabled={!isInitialized}
-                onClick={handleConnect}
+                onClick={() => handleWalletModal()}
                 type="button"
               >
                 Connect wallet

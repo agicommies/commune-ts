@@ -113,9 +113,9 @@ export default function HomePage(): JSX.Element {
           />
           <div className="w-full space-y-10 py-10">
             {isLoading ||
-            !isInitialized ||
-            !proposalsWithMeta ||
-            !daosWithMeta ? (
+              !isInitialized ||
+              !proposalsWithMeta ||
+              !daosWithMeta ? (
               <div className="flex flex-col gap-10">
                 <div className="animate-fade-up animate-delay-200">
                   <CardSkeleton />

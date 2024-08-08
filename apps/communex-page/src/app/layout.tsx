@@ -3,11 +3,11 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 
 import { Providers } from "@commune-ts/providers/context";
-import { WalletButtonWithHook } from "@commune-ts/providers/wallet-button-with-hook";
 import { links } from "@commune-ts/ui/data";
 import { cairo } from "@commune-ts/ui/fonts";
 import { Footer } from "@commune-ts/ui/footer";
 import { Header } from "@commune-ts/ui/header";
+import { WalletButton } from "@commune-ts/wallet/button";
 
 // TODO this could come from the ui lib since the only thing that changes between apps is the title
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default function RootLayout({
               { name: "Home Page", href: links.landing_page, external: true },
             ]}
             title="CommuneX"
-            wallet={<WalletButtonWithHook />}
+            wallet={<WalletButton />}
           />
           {children}
           <Footer shouldBeFixed />
