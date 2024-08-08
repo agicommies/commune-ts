@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 import { useCommune } from "@commune-ts/providers/use-commune";
+import { toast } from "@commune-ts/providers/use-toast";
 import { formatToken } from "@commune-ts/providers/utils";
 
 import { api } from "~/trpc/react";
 
 const MAX_CHARACTERS = 300;
-const MIN_STAKE_REQUIRED = 5000;
+const MIN_STAKE_REQUIRED = 1;
 
 const CommentSchema = z.object({
   content: z
@@ -75,6 +76,10 @@ export function CreateComment({ proposalId }: { proposalId: number }) {
         proposalId,
         userKey: String(selectedAccount.address),
       });
+      toast.success("Comment submitted successfully!, Reloading page...");
+      setTimeout(() => {
+        window.location.reload();
+      }, 700);
     } catch (err) {
       if (err instanceof z.ZodError) {
         setError(err.errors[0]?.message ?? "Invalid input");
