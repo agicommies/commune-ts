@@ -15,6 +15,25 @@ import {
 } from "@commune-ts/db/validation";
 
 import { publicProcedure } from "../trpc";
+import { SignedDataSchema, verifySignedData } from "../auth/signed-data";
+
+export enum SignedEndpoint {
+  CreateComment = "CreateComment",
+  CreateCommentReport = "CreateCommentReport",
+  CastVote = "CastVote",
+  DeleteVole = "DeleteVote",
+}
+
+export const SignedEndpointDataSchema = {
+  [SignedEndpoint.CreateComment]: PROPOSAL_COMMENT_INSERT_SCHEMA,
+  [SignedEndpoint.CreateCommentReport]: COMMENT_REPORT_INSERT_SCHEMA,
+  [SignedEndpoint.CastVote]: COMMENT_INTERACTION_INSERT_SCHEMA,
+  [SignedEndpoint.DeleteVole]: z.object({ commentId: z.string(), userKey: z.string() })
+};
+
+export type SignableEndpointData = {
+  [K in SignedEndpoint]: z.infer<typeof SignedEndpointDataSchema[K]>
+};
 
 export const proposalCommentRouter = {
   // GET
@@ -51,38 +70,54 @@ export const proposalCommentRouter = {
     }),
   // POST
   createComment: publicProcedure
-    .input(PROPOSAL_COMMENT_INSERT_SCHEMA)
+    .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(proposalCommentSchema).values(input);
+      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CreateComment']);
+      if (!address || address !== data.userKey) {
+        throw new Error("User key does not match signature");
+      }
+      await ctx.db.insert(proposalCommentSchema).values(data);
     }),
   createCommentReport: publicProcedure
-    .input(COMMENT_REPORT_INSERT_SCHEMA)
+    .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(commentReportSchema).values(input);
+      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CreateCommentReport']);
+      if (!address || address !== data.userKey) {
+        throw new Error("User key does not match signature");
+      }
+      await ctx.db.insert(commentReportSchema).values(data);
     }),
   castVote: publicProcedure
-    .input(COMMENT_INTERACTION_INSERT_SCHEMA)
+    .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
+      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['CastVote']);
+      if (!address || address !== data.userKey) {
+        throw new Error("User key does not match signature");
+      }
       await ctx.db
         .insert(commentInteractionSchema)
-        .values(input)
+        .values(data)
         .onConflictDoUpdate({
           target: [
             commentInteractionSchema.commentId,
             commentInteractionSchema.userKey,
           ],
           set: {
-            voteType: input.voteType,
+            voteType: data.voteType,
           },
         });
     }),
   deleteVote: publicProcedure
-    .input(z.object({ commentId: z.string(), userKey: z.string() }))
+    .input(SignedDataSchema)
     .mutation(async ({ ctx, input }) => {
+      const { data, address } = verifySignedData(input, SignedEndpointDataSchema['DeleteVote']);
+      if (!address || address !== data.userKey) {
+        throw new Error("User key does not match signature");
+      }
       await ctx.db
         .delete(commentInteractionSchema)
         .where(
-          sql`${commentInteractionSchema.commentId} = ${input.commentId} AND ${commentInteractionSchema.userKey} = ${input.userKey}`,
+          sql`${commentInteractionSchema.commentId} = ${data.commentId} AND ${commentInteractionSchema.userKey} = ${data.userKey}`,
         );
     }),
 } satisfies TRPCRouterRecord;
