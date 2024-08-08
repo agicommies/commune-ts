@@ -94,6 +94,10 @@ interface CommuneContextType {
 
   daosWithMeta: DaoState[] | undefined;
   isDaosLoading: boolean;
+  signHex: (msgHex: `0x${string}`) => Promise<{
+    signature: `0x${string}`,
+    address: string,
+  }>;
 }
 
 const CommuneContext = createContext<CommuneContextType | null>(null);
@@ -483,6 +487,31 @@ export function CommuneProvider({
     return { ...dao, customData };
   });
 
+  /**
+   * Sings a message in hex format
+   * @param msgHex message in hex to sign
+   */
+  async function signHex(msgHex: `0x${string}`): Promise<{ signature: `0x${string}`; address: string }> {
+    if (!selectedAccount || !communeApi.web3FromAddress) {
+      throw new Error("No selected account");
+    }
+    const injector = await communeApi.web3FromAddress(selectedAccount.address);
+
+    if (!injector.signer.signRaw) {
+      throw new Error("Signer does not support signRaw");
+    }
+    const result = await injector.signer.signRaw({
+      address: selectedAccount.address,
+      data: msgHex,
+      type: 'bytes'
+    });
+
+    return {
+      signature: result.signature,
+      address: selectedAccount.address,
+    };
+  }
+
   return (
     <CommuneContext.Provider
       value={{
@@ -526,6 +555,7 @@ export function CommuneProvider({
 
         daosWithMeta,
         isDaosLoading,
+        signHex
       }}
     >
       <Wallet
