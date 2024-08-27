@@ -12,6 +12,13 @@ import type {
 import type { InjectedAccountWithMeta } from "@commune-ts/ui";
 import { toast } from "@commune-ts/providers/use-toast";
 import {
+  SendIcon,
+  StakeIcon,
+  TransferIcon,
+  UnstakeIcon,
+  WalletIcon,
+} from "@commune-ts/public";
+import {
   copyToClipboard,
   formatToken,
   fromNano,
@@ -70,7 +77,11 @@ function WalletHeader(props: WalletProps["header"]) {
           onClick={handleCopy}
           className="flex w-full items-center justify-center gap-2 text-nowrap border border-green-500 bg-green-600/5 px-6 py-2.5 font-semibold transition duration-200 hover:border-green-400 hover:bg-green-500/15 active:bg-green-500/50"
         >
-          <ImageIcon src="wallet-icon.svg" className="h-6 w-6" />
+          <ImageIcon
+            src={WalletIcon as string}
+            className="h-6 w-6"
+            alt="Wallet icon"
+          />
           <span className="flex gap-1">
             <p className="text-green-500">
               {props.selectedAccount.meta.name?.toUpperCase()}
@@ -190,22 +201,22 @@ function WalletActions(props: WalletProps["actions"]) {
 
   const buttons = [
     {
-      src: "send-icon.svg",
+      src: SendIcon,
       text: "Send",
       color: "red",
     },
     {
-      src: "stake-icon.svg",
+      src: StakeIcon,
       text: "Stake",
       color: "amber",
     },
     {
-      src: "unstake-icon.svg",
+      src: UnstakeIcon,
       text: "Unstake",
       color: "purple",
     },
     {
-      src: "transfer-icon.svg",
+      src: TransferIcon,
       text: "Transfer Stake",
       color: "green",
     },

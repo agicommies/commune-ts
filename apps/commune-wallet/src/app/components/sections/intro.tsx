@@ -6,6 +6,7 @@ import { ChevronLeftIcon } from "@heroicons/react/20/solid";
 
 import type { InjectedAccountWithMeta } from "@commune-ts/ui";
 import { useCommune } from "@commune-ts/providers/use-commune";
+import { LogoGreen } from "@commune-ts/public";
 import { Loading, NoWalletExtensionDisplay } from "@commune-ts/ui";
 import { oxanium } from "@commune-ts/ui/fonts";
 
@@ -93,7 +94,7 @@ export function IntroSection(props: IntroSectionProps) {
         <Wallet.Root>
           <div className="col-span-1 flex items-center pb-6">
             <Image
-              src="/logo-green.svg"
+              src={LogoGreen}
               width={45}
               height={45}
               alt="commune logo"

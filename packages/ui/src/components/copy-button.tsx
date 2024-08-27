@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 
+import { DocsIcon } from "@commune-ts/public";
+
 import { cn } from "..";
 import { copyToClipboard } from "../../../subspace/utils";
 
@@ -37,7 +39,7 @@ export function CopyButton(props: CodeComponentProps): JSX.Element {
           alt=""
           className="ml-0.5"
           height={30}
-          src="docs-icon.svg"
+          src={DocsIcon}
           width={30}
         />
       </span>

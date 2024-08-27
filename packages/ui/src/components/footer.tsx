@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+  DiscordIcon,
+  GithubIcon,
+  TelegramIcon,
+  XIcon,
+} from "@commune-ts/public";
+
 import { links } from "..";
 
 export function Footer({ shouldBeFixed = false, className = "" }): JSX.Element {
@@ -39,37 +46,23 @@ const socialList = [
   {
     name: "Discord",
     href: links.discord,
-    icon: (
-      <Image
-        alt="Discord icon"
-        height={26}
-        src="/discord-icon.svg"
-        width={26}
-      />
-    ),
+    icon: <Image alt="Discord icon" height={26} src={DiscordIcon} width={26} />,
   },
   {
     name: "X",
     href: links.x,
-    icon: <Image alt="X icon" height={22} src="/x-icon.svg" width={22} />,
+    icon: <Image alt="X icon" height={22} src={XIcon} width={22} />,
   },
   {
     name: "GitHub",
     href: links.github,
-    icon: (
-      <Image alt="Github icon" height={23} src="/github-icon.svg" width={23} />
-    ),
+    icon: <Image alt="Github icon" height={23} src={GithubIcon} width={23} />,
   },
   {
     name: "Telegram",
     href: links.telegram,
     icon: (
-      <Image
-        alt="Telegram icon"
-        height={22}
-        src="/telegram-icon.svg"
-        width={22}
-      />
+      <Image alt="Telegram icon" height={22} src={TelegramIcon} width={22} />
     ),
   },
 ];

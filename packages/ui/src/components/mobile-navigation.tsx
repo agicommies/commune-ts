@@ -5,6 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 
+import {
+  DiscordIcon,
+  GithubIcon,
+  TelegramIcon,
+  XIcon,
+} from "@commune-ts/public";
+
 import { cn, links } from "..";
 
 interface MobileNavigationProps {
@@ -19,21 +26,21 @@ export function MobileNavigation(props: MobileNavigationProps) {
   const headerSocialLinks = [
     {
       href: links.discord,
-      icon: "/discord-icon.svg",
+      icon: DiscordIcon,
       alt: "Commune's Discord Link",
     },
     {
-      href: links.github,
+      href: GithubIcon,
       icon: "/github-icon.svg",
       alt: "Commune's GitHub Link",
     },
     {
-      href: links.telegram,
+      href: TelegramIcon,
       icon: "/telegram-icon.svg",
       alt: "Commune's Telegram Link",
     },
     {
-      href: links.x,
+      href: XIcon,
       icon: "/x-icon.svg",
       alt: "Commune's X Link",
     },

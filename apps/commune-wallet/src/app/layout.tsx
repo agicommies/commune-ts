@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 
 import { Providers } from "@commune-ts/providers/context";
+import { Logo } from "@commune-ts/public";
 import { links } from "@commune-ts/ui/data";
 import { cairo } from "@commune-ts/ui/fonts";
 import { Footer } from "@commune-ts/ui/footer";
@@ -27,7 +28,7 @@ export default function RootLayout({
       >
         <Providers>
           <Header
-            logoSrc="/logo.svg"
+            logoSrc={Logo}
             navigationLinks={[
               { name: "Governance", href: links.governance, external: true },
               { name: "Blog", href: links.blog, external: true },
