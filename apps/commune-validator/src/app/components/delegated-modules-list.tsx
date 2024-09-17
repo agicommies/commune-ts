@@ -103,14 +103,11 @@ export function DelegatedModulesList() {
 
     try {
       // Delete existing user module data
-      await deleteUserModuleData.mutateAsync({
-        userKey: selectedAccount.address,
-      });
+      await deleteUserModuleData.mutateAsync();
 
       // Submit new user module data
       for (const delegatedModule of delegatedModules) {
         await createUserModuleData.mutateAsync({
-          userKey: selectedAccount.address,
           moduleId: delegatedModule.id,
           weight: delegatedModule.percentage,
         });
@@ -190,9 +187,8 @@ export function DelegatedModulesList() {
                 <span>{isOpen ? "COLLAPSE VIEW" : "EXPAND VIEW"}</span>
                 <span>
                   <ChevronUpIcon
-                    className={`h-5 w-5 transform transition-transform ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`h-5 w-5 transform transition-transform ${isOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </span>
               </button>
@@ -245,12 +241,11 @@ export function DelegatedModulesList() {
               <div className="flex flex-col gap-3">
                 <button
                   onClick={handleSubmit}
-                  className={`mt-4 w-full animate-fade rounded-full border border-white/20 bg-[#898989]/5 p-2 text-white backdrop-blur-md transition duration-200 animate-delay-300 ${
-                    isSubmitting ||
+                  className={`mt-4 w-full animate-fade rounded-full border border-white/20 bg-[#898989]/5 p-2 text-white backdrop-blur-md transition duration-200 animate-delay-300 ${isSubmitting ||
                     totalPercentage !== 100 ||
                     (!selectedAccount.address &&
                       `hover:border-green-500 hover:bg-green-500/10`)
-                  } disabled:opacity-50`}
+                    } disabled:opacity-50`}
                   disabled={
                     isSubmitting ||
                     totalPercentage !== 100 ||

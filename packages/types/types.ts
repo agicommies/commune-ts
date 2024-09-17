@@ -3,16 +3,20 @@ import type { ApiDecoration } from "@polkadot/api/types";
 import type { Header } from "@polkadot/types/interfaces";
 import type { Codec, IU8a } from "@polkadot/types/types";
 import type { Enum, Tagged } from "rustie";
-import { Variant } from "rustie/dist/enum";
-import { z } from "zod";
+import type { Variant } from "rustie/dist/enum";
+import type { z } from "zod";
 
-import {
+import type {
   CUSTOM_METADATA_SCHEMA,
   DAO_APPLICATIONS_SCHEMA,
   DAO_METADATA_SCHEMA,
   PROPOSAL_DATA_SCHEMA,
   PROPOSAL_STATUS_SCHEMA,
-  SUBSPACE_MODULE_SCHEMA,
+  SUBSPACE_MODULE_SCHEMA} from "./validations";
+
+import type {
+  SessionDataSchema,
+  SignedPayloadSchema
 } from "./validations";
 
 export { ZodSchema } from "zod";
@@ -93,11 +97,11 @@ export interface StakeFromData {
   perAddr: Map<string, bigint>;
 }
 
-export type VoteWithStake = {
+export interface VoteWithStake {
   address: SS58Address;
   stake: bigint;
   vote: "In Favor" | "Against";
-};
+}
 
 export interface LastBlock {
   blockHeader: Header;
@@ -242,8 +246,7 @@ export interface UnrewardedProposal {
 
 // == Field Params ==
 
-export interface SubspaceModule
-  extends z.infer<typeof SUBSPACE_MODULE_SCHEMA> {}
+export type SubspaceModule = z.infer<typeof SUBSPACE_MODULE_SCHEMA>
 
 export type OptionalProperties<T> = keyof T extends infer K
   ? K extends keyof T
@@ -254,3 +257,6 @@ export type OptionalProperties<T> = keyof T extends infer K
       : never
     : never
   : never;
+
+  export type SessionData = z.infer<typeof SessionDataSchema>;
+export type SignedPayload = z.infer<typeof SignedPayloadSchema>;

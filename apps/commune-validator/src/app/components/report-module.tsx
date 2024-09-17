@@ -5,17 +5,16 @@ import { XMarkIcon } from "@heroicons/react/16/solid";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { z } from "zod";
 
-import { useCommune } from "@commune-ts/providers/use-commune";
 import { toast } from "@commune-ts/providers/use-toast";
 
 import { api } from "~/trpc/react";
 
 enum ReportReason {
-  spam = "spam",
-  harassment = "harassment",
-  hateSpeech = "hateSpeech",
-  violence = "violence",
-  sexualContent = "sexualContent",
+  spam = "SPAM",
+  harassment = "HARASSMENT",
+  hateSpeech = "HATE_SPEECH",
+  violence = "VIOLENCE",
+  sexualContent = "SEXUAL_CONTENT",
 }
 
 const reportSchema = z.object({
@@ -36,8 +35,6 @@ export function ReportModule({ moduleId }: ReportModuleProps) {
     content: "",
   });
   const [errors, setErrors] = useState<Partial<ReportFormData>>({});
-
-  const { selectedAccount } = useCommune();
 
   const reportModuleMutation = api.module.createModuleReport.useMutation({
     onSuccess: () => {
@@ -84,7 +81,6 @@ export function ReportModule({ moduleId }: ReportModuleProps) {
     if (validateForm()) {
       reportModuleMutation.mutate({
         moduleId,
-        userKey: selectedAccount?.address,
         reason: formData.reason,
         content: formData.content,
       });

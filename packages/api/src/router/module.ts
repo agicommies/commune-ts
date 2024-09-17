@@ -12,7 +12,7 @@ import {
   USER_MODULE_DATA_INSERT_SCHEMA,
 } from "@commune-ts/db/validation";
 
-import { publicProcedure } from "../trpc";
+import { authenticatedProcedure, publicProcedure } from "../trpc";
 
 export const moduleRouter = {
   // GET
@@ -88,30 +88,34 @@ export const moduleRouter = {
       };
     }),
   // POST
-  deleteUserModuleData: publicProcedure
-    .input(z.object({ userKey: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db
-        .delete(userModuleData)
-        .where(eq(userModuleData.userKey, input.userKey));
-    }),
-  createUserModuleData: publicProcedure
+  deleteUserModuleData: authenticatedProcedure.mutation(async ({ ctx }) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const userKey = ctx.user!.userKey;
+    await ctx.db
+      .delete(userModuleData)
+      .where(eq(userModuleData.userKey, userKey));
+  }),
+  createUserModuleData: authenticatedProcedure
     .input(USER_MODULE_DATA_INSERT_SCHEMA)
     .mutation(async ({ ctx, input }) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const userKey = ctx.user!.userKey;
       await ctx.db.insert(userModuleData).values({
         moduleId: input.moduleId,
-        userKey: input.userKey,
         weight: input.weight,
+        userKey,
       });
     }),
-  createModuleReport: publicProcedure
+  createModuleReport: authenticatedProcedure
     .input(MODULE_REPORT_INSERT_SCHEMA)
     .mutation(async ({ ctx, input }) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const userKey = ctx.user!.userKey;
       await ctx.db.insert(moduleReport).values({
         moduleId: input.moduleId,
-        userKey: input.userKey,
         content: input.content,
         reason: input.reason,
+        userKey,
       });
     }),
 } satisfies TRPCRouterRecord;

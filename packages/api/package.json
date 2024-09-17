@@ -22,7 +22,11 @@
   "dependencies": {
     "@commune-ts/db": "workspace:*",
     "@commune-ts/types": "workspace:*",
+    "@commune-ts/utils": "workspace:*",
+    "@polkadot/util": "^12.6.2",
+    "@polkadot/util-crypto": "catalog:",
     "@trpc/server": "catalog:",
+    "jsonwebtoken": "^9.0.2",
     "superjson": "2.2.1",
     "zod": "catalog:"
   },
@@ -30,6 +34,7 @@
     "@commune-ts/eslint-config": "workspace:*",
     "@commune-ts/prettier-config": "workspace:*",
     "@commune-ts/tsconfig": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.6",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

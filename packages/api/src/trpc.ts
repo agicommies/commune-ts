@@ -6,11 +6,13 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@commune-ts/db/client";
+
+import { decodeJwtSessionToken } from "./jwt";
 
 /**
  * 1. CONTEXT
@@ -31,8 +33,25 @@ export const createTRPCContext = (opts: {
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
   console.log(">>> tRPC Request from", source);
 
+  const [authType, authToken] = (
+    opts.headers.get("authorization") ??
+    opts.headers.get("Authorization") ??
+    ""
+  ).split(" ");
+
+  let user: { userKey: string } | null = null;
+  if (authToken) {
+    try {
+      user = decodeJwtSessionToken(authToken);
+    } catch (err) {
+      console.error("Failed to decode JWT", err);
+    }
+  }
+
   return {
     db,
+    authType,
+    user,
   };
 };
 
@@ -79,3 +98,37 @@ export const createTRPCRouter = t.router;
  * tRPC API.
  */
 export const publicProcedure = t.procedure;
+
+/**
+ * Protected procedure
+ *
+ * This is a procedure that requires authentication to be accessed.
+ * header: { Authorization: "Bearer <token>" }
+ *
+ * if the token is valid, the user will always be available in the context as `ctx.user`.
+ *
+ * If the token is invalid, expired, or the user is not found, it will throw an error.
+ */
+export const authenticatedProcedure = t.procedure.use(
+  async function isAuthenticated(opts) {
+    if (!opts.ctx.authType) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must have an active session",
+      });
+    }
+    if (opts.ctx.authType !== "Bearer") {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Invalid or unsupported authentication type",
+      });
+    }
+    if (!opts.ctx.user?.userKey) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Invalid or expired token",
+      });
+    }
+    return opts.next(opts);
+  },
+);

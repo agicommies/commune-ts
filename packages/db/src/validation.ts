@@ -47,6 +47,7 @@ export const PROPOSAL_COMMENT_INSERT_SCHEMA = createInsertSchema(
   id: true,
   createdAt: true,
   deletedAt: true,
+  userKey: true,
 });
 
 export const COMMENT_INTERACTION_INSERT_SCHEMA = createInsertSchema(
@@ -57,6 +58,7 @@ export const COMMENT_INTERACTION_INSERT_SCHEMA = createInsertSchema(
 ).omit({
   id: true,
   createdAt: true,
+  userKey: true,
 });
 
 export const COMMENT_REPORT_INSERT_SCHEMA = createInsertSchema(
@@ -72,6 +74,7 @@ export const COMMENT_REPORT_INSERT_SCHEMA = createInsertSchema(
 ).omit({
   id: true,
   createdAt: true,
+  userKey: true,
 });
 
 export const MODULE_REPORT_INSERT_SCHEMA = createInsertSchema(moduleReport, {
@@ -93,6 +96,7 @@ export const USER_MODULE_DATA_INSERT_SCHEMA = createInsertSchema(
   },
 ).omit({
   id: true,
+  userKey: true,
 });
 
 export const DAO_VOTE_INSERT_SCHEMA = createInsertSchema(daoVoteSchema).omit({
@@ -100,6 +104,7 @@ export const DAO_VOTE_INSERT_SCHEMA = createInsertSchema(daoVoteSchema).omit({
   createdAt: true,
   updatedAt: true,
   deletedAt: true,
+  userKey: true,
 });
 
 export const CADRE_INSERT_SCHEMA = createInsertSchema(cadreSchema).omit({
@@ -115,6 +120,7 @@ export const CADRE_CANDIDATES_INSERT_SCHEMA = createInsertSchema(
   id: true,
   createdAt: true,
   deletedAt: true,
+  userKey: true,
 });
 
 export const CADRE_VOTE_INSERT_SCHEMA = createInsertSchema(
@@ -124,4 +130,5 @@ export const CADRE_VOTE_INSERT_SCHEMA = createInsertSchema(
   createdAt: true,
   updatedAt: true,
   deletedAt: true,
+  userKey: true,
 });

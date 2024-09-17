@@ -1,3 +1,4 @@
+import { stringToHex } from "@polkadot/util";
 import { CID } from "multiformats/cid";
 import { match } from "rustie";
 import { AssertionError } from "tsafe";
@@ -16,15 +17,16 @@ import type {
   SS58Address,
   StorageKey,
   SubspaceModule,
-} from "@commune-ts/types";
+  ZodSchema,
+  SessionData,
+  SignedPayload} from "@commune-ts/types";
 import {
   CUSTOM_METADATA_SCHEMA,
   DAO_APPLICATIONS_SCHEMA,
   isSS58,
   PROPOSAL_SCHEMA,
   SUBSPACE_MODULE_SCHEMA,
-  URL_SCHEMA,
-  ZodSchema,
+  URL_SCHEMA
 } from "@commune-ts/types";
 
 /**
@@ -397,3 +399,41 @@ export function flattenResult<T, E>(x: Result<T, E>): T | null {
     },
   });
 }
+
+function generateNonce(): string {
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join(
+    "",
+  );
+}
+
+export function createSessionData(window: {
+  location: { origin: string };
+}): SessionData {
+  crypto;
+  return {
+    statement:
+      "Sign in with polkadot extension to authenticate your session at " +
+      window.location.origin,
+    uri: window.location.origin || "unknown",
+    // nonce: randomBytes(16).toString("base64"),
+    nonce: generateNonce(),
+    created: new Date().toISOString(),
+  };
+}
+
+export const signData = async <T>(
+  signer: (
+    msgHex: `0x${string}`,
+  ) => Promise<{ signature: `0x${string}`; address: string }>,
+  data: T,
+): Promise<SignedPayload> => {
+  const dataHex = stringToHex(JSON.stringify(data));
+  const { signature, address } = await signer(dataHex);
+  return {
+    payload: dataHex,
+    signature,
+    address,
+  };
+};

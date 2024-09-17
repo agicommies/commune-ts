@@ -37,8 +37,12 @@ export function IntroSection(props: IntroSectionProps) {
   };
 
   const handleSelectWallet = (account: InjectedAccountWithMeta) => {
-    localStorage.setItem("favoriteWalletAddress", account.address);
+    const currentWallet = localStorage.getItem("favoriteWalletAddress");
+    if (account.address === currentWallet) return;
+
     setSelectedAccount(account);
+    localStorage.removeItem("authorization");
+    localStorage.setItem("favoriteWalletAddress", account.address);
     setIsConnected(true);
     props.setShowWallets(false);
     props.onWalletSwitch();
@@ -72,11 +76,10 @@ export function IntroSection(props: IntroSectionProps) {
                 <button
                   key={index}
                   onClick={() => handleSelectWallet(account)}
-                  className={`w-full p-4 text-left transition duration-200 ${
-                    selectedAccount?.address === account.address
+                  className={`w-full p-4 text-left transition duration-200 ${selectedAccount?.address === account.address
                       ? "border border-green-500 bg-green-500/20 text-green-500 hover:bg-green-500/30"
                       : "border border-white/20 text-white hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   <p className="font-semibold">
                     {account.meta.name?.toUpperCase()}

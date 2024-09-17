@@ -112,6 +112,11 @@ interface CommuneContextType {
 
   daosWithMeta: DaoState[] | undefined;
   isDaosLoading: boolean;
+
+  signHex: (msgHex: `0x${string}`) => Promise<{
+    signature: `0x${string}`;
+    address: string;
+  }>;
 }
 
 const CommuneContext = createContext<CommuneContextType | null>(null);
@@ -515,66 +520,79 @@ export function CommuneProvider({
     return { ...dao, customData };
   });
 
+  /**
+ * Sings a message in hex format
+ * @param msgHex message in hex to sign
+ */
+  async function signHex(
+    msgHex: `0x${string}`,
+  ): Promise<{ signature: `0x${string}`; address: string }> {
+    if (!selectedAccount || !communeApi.web3FromAddress) {
+      throw new Error("No selected account");
+    }
+    const injector = await communeApi.web3FromAddress(selectedAccount.address);
+
+    if (!injector.signer.signRaw) {
+      throw new Error("Signer does not support signRaw");
+    }
+    const result = await injector.signer.signRaw({
+      address: selectedAccount.address,
+      data: msgHex,
+      type: "bytes",
+    });
+
+    return {
+      signature: result.signature,
+      address: selectedAccount.address,
+    };
+  }
+
   return (
     <CommuneContext.Provider
       value={{
-        api,
-        communeCacheUrl,
-        isConnected,
-        setIsConnected,
-        isInitialized,
-
         accounts,
-        selectedAccount,
-        setSelectedAccount,
-        handleGetWallets,
-        handleConnect,
-
-        handleWalletModal,
-        openWalletModal,
-
-        balance,
-        isBalanceLoading,
-
-        addStake,
-        removeStake,
-        transfer,
-        transferStake,
-
-        voteProposal,
-        removeVoteProposal,
         addCustomProposal,
         addDaoApplication,
+        addStake,
         addTransferDaoTreasuryProposal,
-
-        updateDelegatingVotingPower,
-
-        lastBlock,
-        isLastBlockLoading,
-
-        daoTreasury,
-        isDaoTreasuryLoading,
-
-        notDelegatingVoting,
-        isNotDelegatingVotingLoading,
-
-        unrewardedProposals,
-        isUnrewardedProposalsLoading,
-
-        rewardAllocation,
-        isRewardAllocationLoading,
-
-        stakeOut,
-        isStakeOutLoading,
-
-        userTotalStaked,
-        isUserTotalStakedLoading,
-
-        proposalsWithMeta,
-        isProposalsLoading,
-
+        api,
+        balance,
+        communeCacheUrl,
         daosWithMeta,
+        daoTreasury,
+        handleConnect,
+        handleGetWallets,
+        handleWalletModal,
+        isBalanceLoading,
+        isConnected,
         isDaosLoading,
+        isDaoTreasuryLoading,
+        isInitialized,
+        isLastBlockLoading,
+        isNotDelegatingVotingLoading,
+        isProposalsLoading,
+        isRewardAllocationLoading,
+        isStakeOutLoading,
+        isUnrewardedProposalsLoading,
+        isUserTotalStakedLoading,
+        lastBlock,
+        notDelegatingVoting,
+        openWalletModal,
+        proposalsWithMeta,
+        removeStake,
+        removeVoteProposal,
+        rewardAllocation,
+        selectedAccount,
+        setIsConnected,
+        setSelectedAccount,
+        signHex,
+        stakeOut,
+        transfer,
+        transferStake,
+        unrewardedProposals,
+        updateDelegatingVotingPower,
+        userTotalStaked,
+        voteProposal,
       }}
     >
       {children}

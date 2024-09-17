@@ -217,8 +217,12 @@ export function Wallet() {
   const router = useRouter();
 
   function handleWalletSelection(wallet: InjectedAccountWithMeta): void {
-    localStorage.setItem("favoriteWalletAddress", wallet.address);
+    const currentWallet = localStorage.getItem("favoriteWalletAddress");
+    if (wallet.address === currentWallet) return;
+
     setSelectedAccount(wallet);
+    localStorage.removeItem("authorization");
+    localStorage.setItem("favoriteWalletAddress", wallet.address);
     setIsConnected(true);
     setIsWalletSelectionView(false);
     setUserStakeWeight(calculateUserStakeWeight());

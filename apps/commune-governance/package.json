@@ -28,6 +28,7 @@
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "rustie": "catalog:",
+    "superjson": "2.2.1",
     "tsafe": "catalog:",
     "zod": "catalog:"
   },
