@@ -28,9 +28,6 @@ RUN turbo prune ${APP_NAME} --docker
 FROM base AS builder
 ARG APP_NAME
 
-ENV NEXT_PUBLIC_WS_PROVIDER_URL="wss://commune-api-node-10.communeai.net"
-ENV NEXT_PUBLIC_CACHE_PROVIDER_URL="https://commune-cache-azn4r.ondigitalocean.app"
-
 WORKDIR /app
 
 COPY --from=pruner /build/out/pnpm-lock.yaml ./pnpm-lock.yaml
@@ -43,6 +40,8 @@ RUN pnpm install --frozen-lockfile
 COPY --from=pruner /build/out/full/ .
 RUN POSTGRES_URL="postgres://postgres:password@localhost:5432/database" \
     PINATA_JWT="junk" \
+    NEXT_PUBLIC_WS_PROVIDER_URL="wss://junk.com" \
+    NEXT_PUBLIC_CACHE_PROVIDER_URL="https://junk.com" \
     pnpm turbo run build --filter=${APP_NAME}
 
 
