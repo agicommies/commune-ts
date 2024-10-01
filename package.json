@@ -11,6 +11,7 @@
     "dev:api": "turbo watch dev -F @commune-ts/api",
     "dev:cache": "turbo dev -F commune-cache",
     "dev:db": "turbo watch dev -F @commune-ts/db",
+    "dev:forum": "turbo watch dev -F commune-forum",
     "dev:governance": "turbo watch dev -F commune-governance",
     "dev:page": "turbo watch dev -F commune-page",
     "dev:roadmap": "turbo watch dev -F communex-roadmap",

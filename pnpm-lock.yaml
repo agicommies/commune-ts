@@ -203,6 +203,100 @@ importers:
         specifier: 'catalog:'
         version: 5.5.4
 
+  apps/commune-forum:
+    dependencies:
+      '@commune-ts/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@commune-ts/providers':
+        specifier: workspace:*
+        version: link:../../packages/providers
+      '@commune-ts/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      '@commune-ts/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@commune-ts/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
+      '@commune-ts/wallet':
+        specifier: workspace:*
+        version: link:../../packages/wallet
+      '@heroicons/react':
+        specifier: 'catalog:'
+        version: 2.1.5(react@18.3.1)
+      '@t3-oss/env-nextjs':
+        specifier: 'catalog:'
+        version: 0.10.1(typescript@5.5.4)(zod@3.23.8)
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.51.24(react@18.3.1)
+      '@trpc/client':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.502(@trpc/server@11.0.0-rc.502)
+      '@trpc/react-query':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.502(@tanstack/react-query@5.51.24(react@18.3.1))(@trpc/client@11.0.0-rc.502(@trpc/server@11.0.0-rc.502))(@trpc/server@11.0.0-rc.502)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/server':
+        specifier: 'catalog:'
+        version: 11.0.0-rc.502
+      '@uiw/react-markdown-preview':
+        specifier: ^5.1.1
+        version: 5.1.2(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next:
+        specifier: 'catalog:'
+        version: 14.2.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: catalog:react18
+        version: 18.3.1
+      react-dom:
+        specifier: catalog:react18
+        version: 18.3.1(react@18.3.1)
+      rustie:
+        specifier: 'catalog:'
+        version: 0.2.0
+      tsafe:
+        specifier: 'catalog:'
+        version: 1.7.2
+      zod:
+        specifier: 'catalog:'
+        version: 3.23.8
+    devDependencies:
+      '@commune-ts/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@commune-ts/tailwind-config':
+        specifier: workspace:*
+        version: link:../../tooling/tailwind
+      '@commune-ts/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@next/eslint-plugin-next':
+        specifier: 'catalog:'
+        version: 14.2.5
+      '@types/node':
+        specifier: 'catalog:'
+        version: 20.16.1
+      '@types/react':
+        specifier: catalog:react18
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: catalog:react18
+        version: 18.3.0
+      jiti:
+        specifier: 'catalog:'
+        version: 1.21.6
+      postcss:
+        specifier: 'catalog:'
+        version: 8.4.41
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 3.4.10(ts-node@10.9.2(@types/node@20.16.1)(typescript@5.5.4))
+      typescript:
+        specifier: 'catalog:'
+        version: 5.5.4
+
   apps/commune-governance:
     dependencies:
       '@commune-ts/api':
@@ -1052,7 +1146,7 @@ importers:
         version: 7.35.0(eslint@9.10.0(jiti@1.21.6))
       eslint-plugin-react-hooks:
         specifier: rc
-        version: 5.1.0-rc-5d19e1c8-20240923(eslint@9.10.0(jiti@1.21.6))
+        version: 5.1.0-rc-67fee58b-20240926(eslint@9.10.0(jiti@1.21.6))
       eslint-plugin-turbo:
         specifier: ^2.1.1
         version: 2.1.2(eslint@9.10.0(jiti@1.21.6))
@@ -3280,8 +3374,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
-  eslint-plugin-react-hooks@5.1.0-rc-5d19e1c8-20240923:
-    resolution: {integrity: sha512-eALOQ3A68fyKEqjfpV8kh8nTvIx48PNqjl4wOMesA5TgVIxIMXipxCq+0+IQkSOxZMPQezR7Jy06ew2JWNfKDA==}
+  eslint-plugin-react-hooks@5.1.0-rc-67fee58b-20240926:
+    resolution: {integrity: sha512-FqGr3J8gqO2ZUW5pJsvDdf5s3F52lOIRlTu2z16uRm1LhyM1vPKvRETmptui6M3Z8C6nfgJA3WYvqLXL5l0KHA==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
@@ -6401,7 +6495,7 @@ snapshots:
       '@polkadot/types': 12.4.2
       '@polkadot/types-codec': 12.4.2
       '@polkadot/util': 13.0.2
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   '@polkadot/types-augment@13.0.1':
     dependencies:
@@ -6414,7 +6508,7 @@ snapshots:
     dependencies:
       '@polkadot/util': 13.0.2
       '@polkadot/x-bigint': 13.0.2
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   '@polkadot/types-codec@13.0.1':
     dependencies:
@@ -6426,7 +6520,7 @@ snapshots:
     dependencies:
       '@polkadot/types-codec': 12.4.2
       '@polkadot/util': 13.0.2
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   '@polkadot/types-create@13.0.1':
     dependencies:
@@ -6446,7 +6540,7 @@ snapshots:
   '@polkadot/types-support@12.4.2':
     dependencies:
       '@polkadot/util': 13.0.2
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   '@polkadot/types-support@13.0.1':
     dependencies:
@@ -7256,7 +7350,7 @@ snapshots:
 
   ast-types@0.13.4:
     dependencies:
-      tslib: 2.6.3
+      tslib: 2.7.0
 
   astring@1.8.6: {}
 
@@ -7998,7 +8092,7 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-react-hooks@5.1.0-rc-5d19e1c8-20240923(eslint@9.10.0(jiti@1.21.6)):
+  eslint-plugin-react-hooks@5.1.0-rc-67fee58b-20240926(eslint@9.10.0(jiti@1.21.6)):
     dependencies:
       eslint: 9.10.0(jiti@1.21.6)
 
